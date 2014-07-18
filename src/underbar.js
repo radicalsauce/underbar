@@ -100,9 +100,9 @@ var _ = {};
   _.uniq = function(array) {
     var noDupesResult = [];
     array =  array.sort(function(a, b) { return a - b; });
-    for(var i = 0; i < array.length; i++){
-      if(array.indexOf(array[i]) === i) noDupesResult.push(array[i]);
-    }
+    _.each(array, function(value, index, arr){
+      if(_.indexOf(arr, value) === index) noDupesResult.push(value);
+    });
     return noDupesResult;
   };
 
