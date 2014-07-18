@@ -100,6 +100,12 @@ var _ = {};
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
+    var noDupesResult = [];
+    array =  array.sort(function(a, b) { return a - b; });
+    for(var i = 0; i < array.length; i++){
+      if(array.indexOf(array[i]) === i) noDupesResult.push(array[i]);
+    }
+    return noDupesResult;
   };
 
 
