@@ -51,7 +51,7 @@ var _ = {};
   // iterator function over each item in the input collection.
   _.each = function(collection, iterator){
     if(Array.isArray(collection)){
-      for(var i = 0; i < collection.length; i++) { 
+      for(var i = 0; i < collection.length; i++){ 
         iterator(collection[i], i, collection);
       }
     } else {
@@ -91,11 +91,9 @@ var _ = {};
   _.reject = function(collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
-    var falseyResult = [];
-    for(var i = 0; i < collection.length; i++){
-      if (test(collection[i]) === false) falseyResult.push(collection[i]); 
-    }
-    return falseyResult;  
+    return _.filter(collection, function(value, index, arr){
+      return !test(value, index, arr);
+    });
   };
 
   // Produce a duplicate-free version of the array.
