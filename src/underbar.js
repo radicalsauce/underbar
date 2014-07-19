@@ -191,23 +191,11 @@ var _ = {};
   _.every = function(collection, iterator) {
     // TIP: Try re-using reduce() here.
     if (collection.length === 0) return true;
-    if (iterator === undefined) return true;
-    var truthyPass = true;
+    iterator || (iterator = _.identity);
 
-    _.each(collection, function(value, index, arr) { 
-      if (!iterator(value)) truthyPass = false; 
-    });
-  
-    return truthyPass; 
-
-    // will return to reduce version later
-
-    // return _.reduce(collection, function(memo, value) {
-    //   if (!iterator(value)) { 
-    //     return false;
-    //   }
-    //   return true;    
-    // });
+    return !!_.reduce(collection, function(isTrue, value) {
+      return isTrue && iterator(value);
+    }, true);
 
   };
 
@@ -215,6 +203,12 @@ var _ = {};
   // provided, provide a default one
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
+    // if (collection.length === 0) return false;
+    // iterator || (iterator = _.identity);
+    // return _.every(collection, function(isTrue, value){
+    //   if (iterator(isTrue)) return true;
+    //   else return false;
+    // });
   };
 
 
