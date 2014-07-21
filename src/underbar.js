@@ -244,6 +244,15 @@ var _ = {};
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
   _.defaults = function(obj) {
+    var orgObj = obj;
+     _.each(arguments, function(obj) {
+      if (obj) {
+        for (var key in obj) {
+          if (orgObj[key] === void 0) orgObj[key] = obj[key];
+        }
+      }
+    });
+    return orgObj;
   };
 
 
