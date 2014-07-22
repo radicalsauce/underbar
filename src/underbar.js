@@ -294,6 +294,16 @@ var _ = {};
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
+    var memo = {};
+
+    return function() {
+      var args = Array.prototype.slice.call(arguments);
+
+      if (args in memo)
+        return memo[args];
+      else
+        return (memo[args] = func.apply(this, args));
+    }
 
   };
 
@@ -304,6 +314,8 @@ var _ = {};
   // parameter. For example _.delay(someFunction, 500, 'a', 'b') will
   // call someFunction('a', 'b') after 500ms
   _.delay = function(func, wait) {
+    var args = Array.prototype.slice.call(arguments, 2);
+    setTimeout(function(){func.apply(this, args)}, wait);
   };
 
 
